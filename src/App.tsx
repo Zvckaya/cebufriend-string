@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 `;
 
 function App() {
+  const [title, setTitle] = useState("");
   const [rowdata, setRowdate] = useState("");
   const [name, setName] = useState("");
   const [pack, setPack] = useState("");
@@ -48,7 +49,13 @@ function App() {
     setRevCash(revcash);
     const isbox = containsAirport(rowDataArrow[6]);
     setIsCarrer(isbox);
-    console.log(isCareer);
+    const realTitle = makeTitle(date + pack + costnumber + "인" + name + "님");
+    setTitle(realTitle);
+  };
+
+  const makeTitle = (str: string) => {
+    const removespc = removeWhitespace(str);
+    return removespc;
   };
 
   const returnCash = (pack: string) => {
@@ -69,6 +76,7 @@ function App() {
         return 110;
       case "바디안캐녀닝 단품":
         return 90;
+
       default:
         return 0;
     }
@@ -114,6 +122,10 @@ function App() {
     }
   };
 
+  function removeWhitespace(str: string) {
+    return str.replace(/\s/g, "");
+  }
+
   function extractNumbers(str: string) {
     const numbers = str.match(/\d+/g);
     const result = numbers ? numbers.join("") : "";
@@ -148,6 +160,8 @@ function App() {
       />
       <button onClick={handleButtonClick}>버튼</button>
       <hr />
+      <h1>{title}</h1>
+      <hr />
       <h1>예약 확정 안내문구</h1>
       {`${date} ${
         isSolo(pack) ? "단독투어" : "조인투어"
@@ -166,6 +180,7 @@ function App() {
       {name}님 <br /> <br />
       {pick} 픽업/ {drop} 드랍 <br />
       예약금 {revCash}만원 투어잔금 {cash} 달러 <br />
+      <br />
       예약 접수 내용 확인 부탁드리며 <br />
       한국시티은행 173-11270-26201 송정현 <br />
       예약금 입금 후 톡 보내주시면 예약 확정됩니다! <br />
