@@ -32,21 +32,21 @@ function App() {
   const handleButtonClick = () => {
     const rowDataArrow = rowdata.split("\t");
     console.table(rowDataArrow);
-    setName(rowDataArrow[2]);
-    const number = Number(extractNumbers(rowDataArrow[5]));
+    setName(rowDataArrow[1]);
+    const number = Number(extractNumbers(rowDataArrow[4]));
     setNumber(number);
-    const date = formatDate(rowDataArrow[6]);
+    const date = formatDate(rowDataArrow[5]);
     setDate(date);
-    const pkg = rowDataArrow[4]; // 패키지 이름 추출
+    const pkg = rowDataArrow[3]; // 패키지 이름 추출
     setPack(pkg);
-    setPick(rowDataArrow[7]);
-    setDrop(rowDataArrow[8]);
+    setPick(rowDataArrow[6]);
+    setDrop(rowDataArrow[7]);
     const cash = number * returnCash(pkg); // 패키지 이름 전달
     const revcash = number * returnRevCash(pkg);
     console.log(cash);
     setCash(cash);
     setRevCash(revcash);
-    const isbox = containsAirport(rowDataArrow[7]);
+    const isbox = containsAirport(rowDataArrow[6]);
     setIsCarrer(isbox);
     console.log(isCareer);
   };
